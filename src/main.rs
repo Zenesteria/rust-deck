@@ -5,36 +5,43 @@ struct Deck{
     cards:Vec<String>
 }
 
-// Inherent Implementation
-impl Deck {
+impl Deck{
     fn new() -> Self {
-        // List of 'suits' - 'hearts', 'spades'
-        let suits = ["Hearts", "Spades", "Diamonds"];
-        // List of 'values' - 'ace', 'two', 'three'
-        let values = ["Ace", "Two", "Three"];
+        let suits = ["Ace", "Spade", "Hearts"];
+        let values = ["One", "Two", "Three"];
 
         let mut cards = vec![];
 
-        // Double nested loop
         for suit in suits{
-            for value in values {
+            for value in values{
                 let card = format!("{} of {}", value, suit);
                 cards.push(card);
             }
         }
 
-        Deck{cards}
+        Deck {cards}
     }
-    
+
     fn shuffle_cards(&mut self){
         let mut rng = thread_rng();
         self.cards.shuffle(&mut rng);
     }
+
+    fn deal(&mut self, number_of_cards:usize) -> Vec<String> {
+        self.cards.split_off(self.cards.len() - number_of_cards)  
+    }
 }
 
-fn main() {
-    let mut deck = Deck::new();
 
+
+fn main(){
+    let mut deck = Deck::new();
     deck.shuffle_cards();
-    println!("Here's your deck: {:#?}", deck);
+
+    println!("Here is your deck of cards {:#?}", deck);
+
+    let hand = deck.deal(3);
+
+    println!("Here is your hand: {:#?}", hand);
+    
 }

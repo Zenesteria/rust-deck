@@ -21,14 +21,15 @@ impl Deck {
             }
         }
 
+        Deck{cards}
+    }
+    
+    fn shuffle(&self){
 
-        let deck = Deck{cards};
-        return deck;
     }
 }
 
 fn main() {
     let deck = Deck::new();
-    
     println!("Here's your deck: {:#?}", deck);
 }
